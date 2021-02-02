@@ -1,13 +1,16 @@
+// const fetch = require('node-fetch')
+
 // PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
 
 // The store will hold all information needed globally
-var store = {
+var store = Immutable.Map({
 	track_id: undefined,
 	player_id: undefined,
 	race_id: undefined,
-}
+})
 
 // We need our javascript to wait until the DOM is loaded
+
 document.addEventListener("DOMContentLoaded", function() {
 	onPageLoad()
 	setupClickHandlers()
@@ -71,6 +74,12 @@ async function delay(ms) {
 	}
 }
 // ^ PROVIDED CODE ^ DO NOT REMOVE
+
+
+// function to update store
+const updateStore = (property, value) => {
+	store = store.set(property, value)
+}
 
 // This async function controls the flow of the race, add the logic and error handling
 async function handleCreateRace() {
@@ -145,6 +154,7 @@ function handleSelectPodRacer(target) {
 	target.classList.add('selected')
 
 	// TODO - save the selected racer to the store
+	updateStore()
 }
 
 function handleSelectTrack(target) {
@@ -182,7 +192,7 @@ function renderRacerCars(racers) {
 
 	return `
 		<ul id="racers">
-			${reuslts}
+			${results}
 		</ul>
 	`
 }
@@ -319,13 +329,39 @@ function defaultFetchOpts() {
 
 // TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
 
-function getTracks() {
+async function getTracks() {
 	// GET request to `${SERVER}/api/tracks`
+	try{
+		const res = await fetch(`${SERVER}/api/tracks`)
+
+		results = await res.json()
+
+		console.log('results', results)
+		return results
+	}
+	catch(error){
+		console.log(error.message)
+	}
 }
 
-function getRacers() {
+
+
+
+async function getRacers() {
 	// GET request to `${SERVER}/api/cars`
+	try{
+		const res = await fetch(`${SERVER}/api/cars`)
+
+		results = await res.json()
+
+		console.log('results', results)
+		return results
+	}
+	catch(error){
+		console.log(error.message)
+	}
 }
+
 
 function createRace(player_id, track_id) {
 	player_id = parseInt(player_id)
@@ -342,9 +378,20 @@ function createRace(player_id, track_id) {
 	.catch(err => console.log("Problem with createRace request::", err))
 }
 
-function getRace(id) {
+async function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
+	try{
+		const res = await fetch(`${SERVER}/api/races/${id}`)
+
+		results = await res.json()
+
+		console.log('results', results)
+	}
+	catch(error){
+		console.log(error.message)
+	}
 }
+
 
 function startRace(id) {
 	return fetch(`${SERVER}/api/races/${id}/start`, {
