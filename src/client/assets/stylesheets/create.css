@@ -6,7 +6,15 @@ header {
   background-image: url('https://via.placeholder.com/1150');
 }
 
-#big-numbers{
+
+.podracer h3, .podracer p, .track h3 {
+  pointer-events: none;
+}
+
+.selected {
+  background-color: cadetblue;
+}
+/* #big-numbers{
   position: fixed;
   width: 100%;
   height: 100%;
@@ -19,7 +27,7 @@ header {
   justify-content: center;
   align-items: center;
   display: none;
-}
+} */
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
 
