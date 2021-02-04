@@ -79,6 +79,7 @@ async function delay(ms) {
 // function to update store
 const updateStore = (property, value) => {
 	store = store.set(property, value)
+	console.log(store)
 }
 
 // This async function controls the flow of the race, add the logic and error handling
@@ -87,7 +88,11 @@ async function handleCreateRace() {
 	renderAt('#race', renderRaceStartView())
 
 	// TODO - Get player_id and track_id from the store
+	const player_id1 = store.get('player_id')
+	const track_id1 = store.get('track_id')
 	
+	console.log('player_id', player_id1)
+	console.log('track_id1', track_id1)
 	// const race = TODO - invoke the API call to create the race, then save the result
 
 	// TODO - update the store with the race id
@@ -125,21 +130,32 @@ async function runCountdown() {
 	try {
 		// wait for the DOM to load
 		await delay(1000)
-		let timer = 3
+		let timer = 4
 
 		return new Promise(resolve => {
 			// TODO - use Javascript's built in setInterval method to count down once per second
+			const intervalcountdown = setInterval(function(){
 
+			document.getElementById('big-numbers').style.display = 'block';
 			// run this DOM manipulation to decrement the countdown for the user
 			document.getElementById('big-numbers').innerHTML = --timer
 
 			// TODO - if the countdown is done, clear the interval, resolve the promise, and return
-
+			if(timer <= 0) {
+				clearInterval(intervalcountdown)
+				resolve("done")
+				return document.getElementById('big-numbers').style.display = 'none';
+			}
+				
+			}, 1000)
 		})
 	} catch(error) {
 		console.log(error);
 	}
+	
 }
+
+
 
 function handleSelectPodRacer(target) {
 	console.log("selected a pod", target.id)
@@ -154,7 +170,8 @@ function handleSelectPodRacer(target) {
 	target.classList.add('selected')
 
 	// TODO - save the selected racer to the store
-	updateStore()
+	updateStore('player_id', target.id)
+	
 }
 
 function handleSelectTrack(target) {
@@ -170,7 +187,7 @@ function handleSelectTrack(target) {
 	target.classList.add('selected')
 
 	// TODO - save the selected track id to the store
-	
+	updateStore('track_id', target.id)
 }
 
 function handleAccelerate() {

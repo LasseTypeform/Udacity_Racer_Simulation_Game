@@ -6,7 +6,20 @@ header {
   background-image: url('https://via.placeholder.com/1150');
 }
 
-
+#big-numbers{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  background: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
 
