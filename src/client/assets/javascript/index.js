@@ -98,11 +98,9 @@ async function handleCreateRace() {
 	// const race = TODO - invoke the API call to create the race, then save the result
 	try {
 		const res = await createRace(player_id, track_id)
-		console.log(res)
 		const raceID = (res.ID -1)
 	// TODO - update the store with the race id
 		updateStore(store, {race_id: raceID})
-		console.log(store)
 	// The race has been created, now start the countdown
 		
 	// TODO - call the async function runCountdown
@@ -121,21 +119,16 @@ function runRace(raceID) {
 	return new Promise(resolve => {
 	// TODO - use Javascript's built in setInterval method to get race info every 500ms
 
-	try { 	setInterval( async function(){
+	try { 
+		const raceInterval = setInterval( async function(){
 		const res = await getRace(raceID)
-
-
-		console.log(res)
 	/* 
 		TODO - if the race info status property is "in-progress", update the leaderboard by calling:
 		
 		renderAt('#leaderBoard', raceProgress(res.positions))
 	*/	
-		console.log('store', store);
 		if(res.status === "in-progress"){
-			console.log('res.positions', res.positions)
 			renderAt('#leaderBoard', raceProgress(res.positions))
-
 		}
 		/* 
 		TODO - if the race info status property is "finished", run the following:
@@ -144,10 +137,10 @@ function runRace(raceID) {
 		renderAt('#race', resultsView(res.positions)) // to render the results view
 		reslove(res) // resolve the promise
 		*/
-		else if(res.status === "finished"){
+		if(res.status === "finished"){
 		clearInterval(raceInterval) // to stop the interval from repeating
 		renderAt('#race', resultsView(res.positions)) // to render the results view
-		reslove(res) // resolve the promise
+		resolve(res) // resolve the promise
 		}
 	
 	}, 500)
@@ -320,7 +313,7 @@ function resultsView(positions) {
 		</header>
 		<main>
 			${raceProgress(positions)}
-			<a href="/race">Start a new race</a>
+			<a class="button "href="/race">Start a new race</a>
 		</main>
 	`
 }
@@ -344,7 +337,7 @@ function raceProgress(positions) {
 	})
 
 	return `
-		<main>
+		<main class="main-results">
 			<h3>Leaderboard</h3>
 			<section id="leaderBoard">
 				${results}

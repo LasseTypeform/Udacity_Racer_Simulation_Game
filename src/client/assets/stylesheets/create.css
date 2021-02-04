@@ -3,7 +3,7 @@
 /* -------------------  MOBILE  --------------------- */
 
 header {
-  background-image: url('https://via.placeholder.com/1150');
+  background-image: url('../images/legoRacing.png');
 }
 
 
@@ -14,20 +14,15 @@ header {
 .selected {
   background-color: cadetblue;
 }
-/* #big-numbers{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  padding: 0;
-  margin: 0;
-  background: antiquewhite;
+
+.main-results {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  display: none;
-} */
+}
+
+
+
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
 
