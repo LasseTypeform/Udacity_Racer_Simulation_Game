@@ -1,5 +1,12 @@
 # Welcome to the One and only UdaciRacer Simulation Game
 
+## Student Introduction
+To work with this project start by using git clone https://github.com/LasseTypeform/Udacity_Racer_Simulation_Game.git then follow the steps below. 
+
+I've chosen to write my code to handle promises by using async/await functions containing try/catch for response and error handling.
+
+To complete the race logic, I had to find all the TODO tags in index.js and add needed code per the instructions given.
+
 ## Project Introduction
 
 Here is a partially built-out game that races cars—your job is to complete it! Throughout the game logic, you will find _"TODO"_ comments that must be completed in order for the game to work. You are going to use the asynchronous skills you gained in the course to fill in the blanks in this game.
@@ -16,15 +23,15 @@ The game has three main views:
 
 ## Starter Code
 
-We have supplied you with the following:
+I've been supplied with the following code:
 
-1. An API. The API is provided in the form of a binary held in the bin folder. You never need to open the binary file, as there are no edits you can make to it. Your work will be 100% in the front end.
+1. An API. The API is provided in the form of a binary held in the bin folder. You never need to open the binary file, as there are no edits you can make to it. My work has be 100% in the front end.
 
-2. HTML Views. The focus of this course is not UI development or styling practice, so we have already provided you with pieces of UI, all you have to do is call them at the right times.
+2. HTML Views. The focus of this course is not UI development or styling practice, so I've already been provided pieces of UI, all I had to do was call them at the right times.
 
 ## Getting Started
 
-In order to build this game, we need to run two things: the game engine API and the front end.
+In order to build this game, I needed to run two things: the game engine API and the front end.
 
 ### Start the Server
 
@@ -46,8 +53,6 @@ If you are using a windows machine:
 2. Run the following command to add the environment variable:
 ```set DATA_FILE=./data.json```
 
-If you still run into issues running the API server on your machine, you can run this project in the Udacity classroom.
-
 
 ### Start the Frontend
 
@@ -55,13 +60,13 @@ First, run your preference of `npm install && npm start` or `yarn && yarn start`
 
 ## Project Requirements
 
-This starter code base has directions for you in `src/client/assets/javascript/index.js`. There you will be directed to use certain asynchronous methods to achieve tasks. You will know you're making progress as you can play through more and more of the game.
+This starter code base had directions for me in `src/client/assets/javascript/index.js`. I were directed to use certain asynchronous methods to achieve tasks.
 
 ### API Calls
 
-To complete the project you must first create the calls to the API. These will all be fetch requests, and all information needed to create the request is provided in the instructions. The API calls are all at the bottom of the file: `src/client/assets/javascript/index.js`.
+To complete the project I first had to create the calls to the API. These were all be fetch requests, and all information needed to create the request was provided in the instructions. The API calls are all at the bottom of the file: `src/client/assets/javascript/index.js`.
 
-Below are a list of the API endpoints and the shape of the data they return. These are all of the endpoints you need to complete the game. Consult this information often as you complete the project:
+Below are a list of the API endpoints and the shape of the data they return. 
 
 [GET] `api/tracks`
 List of all tracks
@@ -104,4 +109,4 @@ Accelerate a car
 
 - Returns nothing
 
-To complete the race logic, find all the TODO tags in index.js and read the instructions.
+* Done 

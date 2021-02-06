@@ -79,8 +79,6 @@ async function delay(ms) {
 // function to update store
 const updateStore = (currState, keyValuPair) => {
 	store = Object.assign({}, currState, keyValuPair)
-	
-	console.log('newStore', store)
 }
 
 // This async function controls the flow of the race, add the logic and error handling
@@ -92,17 +90,15 @@ async function handleCreateRace() {
 	renderAt('#race', renderRaceStartView(store.track_name))
 	
 	// TODO - Get player_id and track_id from the store
-	const player_id = Number(store.player_id)
-	const track_id = store.track_id
+	const state = Object.assign(store)
 	
 	// const race = TODO - invoke the API call to create the race, then save the result
 	try {
-		const res = await createRace(player_id, track_id)
+		const res = await createRace(state.player_id, state.track_id)
 		const raceID = (res.ID -1)
 	// TODO - update the store with the race id
 		updateStore(store, {race_id: raceID})
 	// The race has been created, now start the countdown
-		
 	// TODO - call the async function runCountdown
 	await runCountdown()
 	// TODO - call the async function startRace
@@ -194,7 +190,7 @@ function handleSelectPodRacer(target) {
 	// add class selected to current target
 	target.classList.add('selected')
 	// TODO - save the selected racer to the store
-	return updateStore(store, {player_id: target.id})	
+	return updateStore(store, {player_id: Number(target.id)})	
 }
 
 function handleSelectTrack(target) {
@@ -374,7 +370,7 @@ async function getTracks() {
 	try{
 		const res = await fetch(`${SERVER}/api/tracks`)
 
-		tracks = await res.json()
+		const tracks = await res.json()
 
 		console.log('tracks from API', tracks)
 		return tracks
@@ -392,7 +388,7 @@ async function getRacers() {
 	try{
 		const res = await fetch(`${SERVER}/api/cars`)
 
-		racers = await res.json()
+		const racers = await res.json()
 
 		console.log('Racers from API', racers)
 		return racers
@@ -423,7 +419,7 @@ async function getRace(id) {
 	try{
 		const res = await fetch(`${SERVER}/api/races/${id}`)
 
-		race = await res.json()
+		const race = await res.json()
 
 		console.log('race', race)
 		return race
@@ -444,15 +440,19 @@ function startRace(id) {
 	.catch(err => console.log("Problem with getRace request::", err))
 }
 
-function accelerate(id) {
+async function accelerate(id) {
 	// POST request to `${SERVER}/api/races/${id}/accelerate`
 	// options parameter provided as defaultFetchOpts
 	// no body or datatype needed for this request
-	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
-		method: 'POST',
-		...defaultFetchOpts(),
-	})
-	.then(res => res)
-	// .then(res => res.json())
-	.catch(err => console.log("Problem with getRace request::", err))
+	try{
+		const res = await fetch(`${SERVER}/api/races/${id}/accelerate`, {
+			method: 'POST',
+			...defaultFetchOpts(),
+		})
+		return res
+	}
+	catch(error) {
+		console.log("Problem with getRace request::", error)
+	} 
 }
+
